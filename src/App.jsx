@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, memo } from "react";
 
 const PoliticianCard = memo(({ image, name, position, biography }) => {
-  console.log("Render:", name);
+  /* console.log("Render:", name); */
   return (
     <div className="politician-card">
       <figure className="politician-card-image">
@@ -34,7 +34,7 @@ function App() {
 
         setPoliticiansList(fetchResPoliticians);
       } catch (err) {
-        console.error(err);
+        console.error("Errore nella fetch:", err);
       }
     };
     newPoliticiansList();
