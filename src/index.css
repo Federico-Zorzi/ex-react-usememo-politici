@@ -1,0 +1,45 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+  height: 100%;
+  padding: 2rem;
+  margin: 0;
+}
+
+.cards-list-politicians {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.politician-card {
+  height: 300px;
+  max-width: 700px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+
+  display: flex;
+}
+
+.politician-card-image,
+.politician-card-image img {
+  margin: 0;
+  height: 100%;
+  width: 230px;
+  border-start-start-radius: 15px;
+  border-end-start-radius: 15px;
+}
+
+.politician-card-content {
+  padding: 1rem;
+}
+
+.politician-card-content h3 {
+  margin: 0 0 1rem;
+}
+
+.politician-card-content p {
+  max-height: 200px;
+  overflow: scroll;
+}
