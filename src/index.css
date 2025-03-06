@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+#search-field {
+  margin-bottom: 1rem;
+}
+
 .cards-list-politicians {
   display: flex;
   flex-wrap: wrap;
