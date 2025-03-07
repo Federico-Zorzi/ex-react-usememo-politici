@@ -7,7 +7,8 @@ body {
   margin: 0;
 }
 
-#search-field {
+#search-field,
+#search-field-position {
   margin-bottom: 1rem;
 }
 

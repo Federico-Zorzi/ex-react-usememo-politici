@@ -19,7 +19,8 @@ const PoliticianCard = memo(({ image, name, position, biography }) => {
 function App() {
   const [politiciansList, setPoliticiansList] = useState([]);
   const [filter, setFilter] = useState("");
-  /* console.log(politiciansList); */
+  const [filterPosition, setFilterPosition] = useState("");
+  /* console.log(filterPosition); */
 
   useEffect(() => {
     const newPoliticiansList = async () => {
@@ -40,15 +41,27 @@ function App() {
     newPoliticiansList();
   }, []);
 
-  const filteredPoliticiansList = useMemo(() => {
-    if (!filter.trim()) return politiciansList;
+  const filterPositions = useMemo(() => {
+    const politicPositions = [];
+    politiciansList.forEach((p) => {
+      if (!politicPositions.includes(p.position))
+        politicPositions.push(p.position);
+    });
+    return politicPositions;
+  }, [politiciansList]);
 
-    return politiciansList.filter(
-      (p) =>
-        p.name.toLowerCase().includes(filter.toLowerCase()) ||
-        p.biography.toLowerCase().includes(filter.toLowerCase())
-    );
-  }, [politiciansList, filter]);
+  const filteredPoliticiansList = useMemo(() => {
+    return politiciansList.filter((p) => {
+      const nameMatches = p.name.toLowerCase().includes(filter.toLowerCase());
+      const bioMatches = p.biography
+        .toLowerCase()
+        .includes(filter.toLowerCase());
+      const positionMatches =
+        filterPosition === "" || p.position === filterPosition;
+
+      return (nameMatches || bioMatches) && positionMatches;
+    });
+  }, [politiciansList, filter, filterPosition]);
 
   return (
     <main>
@@ -56,9 +69,27 @@ function App() {
 
       {/* SEARCH FIELD */}
       <div id="search-field">
-        <input type="text" onChange={(e) => setFilter(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Cerca per nome o biografia"
+          onChange={(e) => setFilter(e.target.value)}
+        />
       </div>
-
+      <div id="search-field-position">
+        <select
+          id="politician-position"
+          name=""
+          value={filterPosition}
+          onChange={(e) => setFilterPosition(e.target.value)}
+        >
+          <option value="">Cerca per posizione politica...</option>
+          {filterPositions.map((fp, i) => (
+            <option key={fp} value={fp}>
+              {fp}
+            </option>
+          ))}
+        </select>
+      </div>
       <section className="cards-list-politicians">
         {filteredPoliticiansList.length > 0 &&
           filteredPoliticiansList.map((politician) => (
